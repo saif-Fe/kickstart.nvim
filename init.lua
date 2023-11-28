@@ -143,15 +143,7 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      show_trailing_blankline_indent = false,
-    },
-  },
+{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
@@ -198,7 +190,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
   "windwp/nvim-autopairs",
@@ -261,6 +253,34 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- Harpoon Setup
+require("harpoon").setup()
+
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<A-a>", mark.add_file)
+vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
+
+vim.keymap.set("n", "<A-u>", function()
+  ui.nav_file(1)
+end)
+vim.keymap.set("n", "<A-i>", function()
+  ui.nav_file(2)
+end)
+vim.keymap.set("n", "<A-o>", function()
+  ui.nav_file(3)
+end)
+vim.keymap.set("n", "<A-p>", function()
+  ui.nav_file(4)
+end)
+vim.keymap.set("n", "<A-[>", function()
+  ui.nav_next()
+end)
+vim.keymap.set("n", "<A-]>", function()
+  ui.nav_prev()
+end)
 
 -- [[ Basic Keymaps ]]
 
